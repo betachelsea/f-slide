@@ -20,11 +20,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-# 2012/12/23 add setting
-group :development do
-  gem 'thin'
-end
-
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
