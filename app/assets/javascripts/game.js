@@ -2,23 +2,27 @@ enchant();//use enchant.js
 
 var _click_x = 0;
 var _click_y = 0;
+/*
 var _resource = ['8cell_animated.gif', 'break_dance.gif',
 				'green_dance_girl.gif', 'spiral_circle.gif',
 				'square.gif', 'truck.gif', 'glasses.gif',
 				'green_rain.gif','matrix.gif','move.gif'];
-				
+*/
+
+var _resource = ['00004122L.jpg', '00000453L.jpg', '00003377L.jpg'];
+
 var _nowResourceNum = 0;
 var _playStartTime = -1;//-1:未測定、他：シャッフル開始時間
 var _record = 0;
 var _complete = false;
 //var _shuffle_stop = false;
 var _root_partsimg = "./assets/";
-var _root_gifimg = "./assets/gif/";
+var _root_gifimg = "./assets/fukui/";
 
 window.onload = function(){
 	
 	//初期設定＆リソース読み込み他
-	var game = new Game(320, 460);
+	var game = new Game(320, 450);
 	game.fps = 15;
 	
 	for(var i=0; i<_resource.length; i++){
@@ -35,28 +39,34 @@ window.onload = function(){
     
     game.onload = function() {
     	//スライドパズルの箱
-    	var slideBox = new SlideBox(game.assets[_root_gifimg+_resource[_nowResourceNum]], 29+22, 50+22, 57*4);
+    	var slideBox = new SlideBox(
+					game.assets[_root_gifimg+_resource[_nowResourceNum]], 
+					0, 
+					0, 
+					57*4);//57px*4マスサイズ
     	
    		//ヘッダー
+   		/*
    		var header = new Sprite(320, 44);
    		header.image = game.assets[_root_partsimg+"header.png"];
-   		
+   		*/
    		//表示情報   		
    		var info = new Label();
    		info.x = 10;
-   		info.y = 360;
-   		info.color = "white";
-   		info.text ="SlidePuzzle + MOVE!";
+   		info.y = 300;
+   		info.color = "Black";
+   		info.text ="SlidePuzzle for Fukui";
    		
    		//操作系フッター
    		var nextButton = new Sprite(90, 48);
    		nextButton.image = game.assets[_root_partsimg+"next.png"];
    		nextButton.moveTo(320-90, 460-48);
    		nextButton.addEventListener("touchstart", function() {
+			
 			_shuffle_stop = true;
 			_playStartTime = -1;
    			this.image = game.assets[_root_partsimg+"next_on.png"];
-   			info.text = "SlidePuzzle + MOVE!";
+   			info.text = "SlidePuzzle for Fukui";
    			_nowResourceNum++;
    			if(_nowResourceNum >= _resource.length){
    				_nowResourceNum = 0;
@@ -76,7 +86,7 @@ window.onload = function(){
    			_playStartTime = -1;
    			this.image = game.assets[_root_partsimg+"prev_on.png"];
    			_nowResourceNum--;
-			info.text = "SlidePuzzle + MOVE!";
+			info.text = "SlidePuzzle for Fukui";
    			if(_nowResourceNum <= -1 ){
    				_nowResourceNum = _resource.length-1;
    			}
@@ -93,7 +103,7 @@ window.onload = function(){
    		resetButton.addEventListener("touchstart", function() {
    			_shuffle_stop = true;
    			_playStartTime = -1;
-   			info.text = "SlidePuzzle + MOVE!";
+   			info.text = "SlidePuzzle for Fukui";
    			this.image = game.assets[_root_partsimg+"reset_on.png"];
    			slideBox.changeImage(game.assets[_root_gifimg+_resource[_nowResourceNum]]);
    		});
@@ -103,12 +113,12 @@ window.onload = function(){
    		
    		//メインScene
    		var scene = game.rootScene;
-   		scene.backgroundColor = "Black";
+   		scene.backgroundColor = "white";
    		for(var i=0; i<slideBox.pieces.length; i++){	
    			scene.addChild(slideBox.pieces[i]);
    		}
 
-   		scene.addChild(header);
+   		//scene.addChild(header);
    		scene.addChild(nextButton);
    		scene.addChild(prevButton);
    		scene.addChild(resetButton);
@@ -120,7 +130,6 @@ window.onload = function(){
    		scene.addEventListener('touchstart', function(e) {
    		
    			var result = slideBox.operatePiece(e.localX, e.localY);
-   			console.log("result->"+result);
    			if(result === 0) {
    				//シャッフル
    				_shuffle_stop = false;
@@ -142,7 +151,7 @@ window.onload = function(){
 					if(_shuffle_stop) {
 						_shuffle_stop = false;
 						this.removeEventListener('enterframe', add_shuffle);
-						info.text = "SlidePuzzle + MOVE!";
+						info.text = "SlidePuzzle for Fukui";
 						//_playStartTime = parseInt(game.frame/game.fps);
 						slideBox.changeImage(game.assets[_root_gifimg+_resource[_nowResourceNum]]);
 
@@ -179,9 +188,9 @@ window.onload = function(){
    		
    		var copy = new Label();
    		copy.x = 10;
-   		copy.y = 380;
-   		copy.text = "gif images from : www.avatarsdb.com";
-   		copy.color = "white";
+   		copy.y = 330;
+   		copy.text = "Image from 福井県観光写真素材集 : http://www.sozai.fuku-e.com";
+   		copy.color = "Black";
    		scene.addChild(copy);
    		
     }

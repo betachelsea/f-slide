@@ -3,31 +3,52 @@
  */
 var SlideBox = enchant.Class.create({
 
-	//img:オリジナルgif画像、 sq_size:パズル全体サイズ
+	//img:オリジナル画像、 sq_size:パズル全体サイズ
 	initialize: function(img, put_x, put_y, sq_size) {
 		this.pieces = [];
 		this.x = put_x;
 		this.y = put_y;
+		//this.x = 0;
+		//this.y = 0;
 		this.boxsize = sq_size;
 		this.blankindex = 15;//初期値Blank
 		//imgは正方形であることが保証されているものとする。
-		var orgsize = img.width;
-		console.log(img.width);
+		//2012/12/23 : 正方形が保証されていないことを考える
 		
+		//一辺のサイズ決定
+		var orgsize = 100;
+		var sx = 0;
+		var sy = 0;
+		if (img.height < img.width) {
+			orgsize = img.height;
+			sx = img.width/2 - orgsize/2;
+		} else {
+			orgsize = img.width;
+			sy = img.height/2 - orgsize/2;
+		}
+		//画像を正方形に加工（画像の一部をトリミングして読み込み）
+		var process_img = new Surface(sq_size, sq_size);
+		process_img.draw(img, sx, sy, orgsize, orgsize,
+													0, 0, sq_size, sq_size);
+		//img.width = orgsize;
+		//img.height = orgsize;
+
 		//一辺を4つに分割
 		this.divide = 4;
 		
 		for(var yn=0; yn<this.divide; yn++){
 			for(var xn=0; xn<this.divide; xn++) {
-				var psize = img.width/this.divide;
-				var one = new Piece(img, psize, xn, yn, xn+yn*this.divide);
-				one.image = img;
+				var psize = orgsize/this.divide; //１ピース分の画像pixelサイズ
+				var one = new Piece(process_img, sq_size/this.divide, xn, yn, xn+yn*this.divide);
+				one.image = process_img;
 				var rate = sq_size/orgsize;
-				one.scale(sq_size/orgsize); 
-				one.x = put_x + xn*(sq_size/this.divide) + psize/2;
-				one.y = put_y + yn*(sq_size/this.divide) + psize/2;
-				
-				
+				//one.scale(sq_size/orgsize); 
+				//one.x = put_x + xn*(sq_size/this.divide) + psize/2;
+				//one.y = put_y + yn*(sq_size/this.divide) + psize/2;
+				one.x = put_x + xn*(sq_size/this.divide);
+				one.y = put_y + yn*(sq_size/this.divide);
+				console.log("one.x->"+one.x+",one.y->"+one.y);
+
 				if(xn+yn*this.divide === 15){
 					one.setBlank();
 				}
@@ -40,10 +61,27 @@ var SlideBox = enchant.Class.create({
 	changeImage: function(img) {
 		var self = this;
 		
+		//一辺のサイズ決定
+		var orgsize = 100;
+		var sx = 0;
+		var sy = 0;
+		if (img.height < img.width) {
+			orgsize = img.height;
+			sx = img.width/2 - orgsize/2;
+		} else {
+			orgsize = img.width;
+			sy = img.height/2 - orgsize/2;
+		}
+		
+		//画像を正方形に加工（画像の一部をトリミングして読み込み）
+		var process_img = new Surface(self.boxsize, self.boxsize);
+		process_img.draw(img, sx, sy, orgsize, orgsize,
+													0, 0, self.boxsize, self.boxsize);
+		
 		for(var i=0; i<self.pieces.length; i++){
 			self.pieces[i].frame = i;
-			self.pieces[i].orgimg = img;
-			self.pieces[i].image = img;
+			self.pieces[i].orgimg = process_img;
+			self.pieces[i].image = process_img;
 		}
 		self.blankindex = 15;
 		self.pieces[15].setBlank();
@@ -60,10 +98,12 @@ var SlideBox = enchant.Class.create({
 			box_y < 0 || self.boxsize < box_y ) {
 			return -1;
 		}		
-		
+	
 		var xn = Math.floor(box_x / (self.boxsize/self.divide));
 		var yn = Math.floor(box_y / (self.boxsize/self.divide));
-		 
+		
+		console.log("box_x->"+box_x+",box_y->"+box_y);
+
 		var num = xn + yn*self.divide;
 		
 		if(num > 15) return -1;
@@ -150,7 +190,6 @@ var SlideBox = enchant.Class.create({
 			}
 		}
 		
-		console.log("result->"+result);
 		return result;
 	}
 });
@@ -165,7 +204,8 @@ var Piece = enchant.Class.create(enchant.Sprite, {
 		enchant.Sprite.call(this, size, size);
 		this.loc_x = xn;//X座標個数
 		this.loc_y = yn;//Y座標個数
-		this.backgroundColor = "white";
+		//this.image = img;
+		this.backgroundColor = "White";
 		//this.number = n;//パネル通し番号0-15
 		this.frame = n;//表示中画像
 		this.orgimg = img;//元画像
