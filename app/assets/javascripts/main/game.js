@@ -1,5 +1,6 @@
 enchant();//use enchant.js
 
+
 var _click_x = 0;
 var _click_y = 0;
 var _resource = ['00004122L.jpg', '00000453L.jpg', '00003377L.jpg'];
