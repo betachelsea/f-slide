@@ -1,6 +1,5 @@
 enchant();//use enchant.js
 
-
 var _click_x = 0;
 var _click_y = 0;
 var _resource = ['00004122L.jpg', '00000453L.jpg', '00003377L.jpg'];
@@ -16,10 +15,12 @@ var _PUZZLE_BOX_SIZE = 320;
 
 window.onload = function(){
 
+	console.log("hey");
 	//初期設定＆リソース読み込み他
-	var game = new Game(_PUZZLE_BOX_SIZE, _PUZZLE_BOX_SIZE);
+	var game = new Game(320, 320);
 	game.fps = 15;
-	
+
+
 	for(var i=0; i<_resource.length; i++){
 		game.preload(_root_gifimg+_resource[i]);
   }
@@ -35,7 +36,8 @@ window.onload = function(){
     game.onload = function() {
     	//スライドパズルの箱
     	var slideBox = new SlideBox(
-					game.assets[_root_gifimg+_resource[_nowResourceNum]], _PUZZLE_BOX_SIZE);//57px*4マスサイズ
+					game.assets[_root_gifimg+_resource[_nowResourceNum]], 
+					57*4);//57px*4マスサイズ
     	
    		//ヘッダー
    		/*

@@ -45,7 +45,6 @@ var SlideBox = enchant.Class.create({
 				//one.y = put_y + yn*(sq_size/this.divide) + psize/2;
 				one.x = xn*(sq_size/this.divide);
 				one.y = yn*(sq_size/this.divide);
-				console.log("one.x->"+one.x+",one.y->"+one.y);
 
 				if(xn+yn*this.divide === 15){
 					one.setBlank();
