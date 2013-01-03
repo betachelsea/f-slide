@@ -13,8 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require enchant.min
-//= require_directory ./package
-//= require_directory ./classes
-//= require_directory ./Apps
-//= require_directory ./main
-
+//= require_tree .

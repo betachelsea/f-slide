@@ -37,7 +37,7 @@ window.onload = function(){
     	//スライドパズルの箱
     	var slideBox = new SlideBox(
 					game.assets[_root_gifimg+_resource[_nowResourceNum]], 
-					57*4);//57px*4マスサイズ
+					320);//57px*4マスサイズ
     	
    		//ヘッダー
    		/*
