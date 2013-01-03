@@ -15,7 +15,6 @@ var _PUZZLE_BOX_SIZE = 320;
 
 window.onload = function(){
 
-	console.log("hey");
 	//初期設定＆リソース読み込み他
 	var game = new Game(320, 320);
 	game.fps = 15;
