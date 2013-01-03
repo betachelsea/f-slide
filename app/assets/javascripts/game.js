@@ -11,12 +11,13 @@ var _complete = false;
 //var _shuffle_stop = false;
 var _root_partsimg = "./assets/";
 var _root_gifimg = "./assets/fukui/";
-var _PUZZLE_BOX_SIZE = 320;
+var _PUZZLE_BOX_SIZE = 200;
+
 
 window.onload = function(){
 
 	//初期設定＆リソース読み込み他
-	var game = new Game(320, 320);
+	var game = new Game(_PUZZLE_BOX_SIZE, _PUZZLE_BOX_SIZE);
 	game.fps = 15;
 
 
@@ -36,7 +37,7 @@ window.onload = function(){
     	//スライドパズルの箱
     	var slideBox = new SlideBox(
 					game.assets[_root_gifimg+_resource[_nowResourceNum]], 
-					320);//57px*4マスサイズ
+					_PUZZLE_BOX_SIZE);
     	
    		//ヘッダー
    		/*
