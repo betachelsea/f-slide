@@ -1,19 +1,24 @@
 
-<!--
-	<h1>hello!</h1>
+
+<div id="wrap">
+
+<h1>test</h1>
 <p><%= @msg %></p>
 <p>
 <% @filenames.each do |f| %>
 	[タイトル]<%= f.filename %>, [登録日？]<%= f.id %><br />
 <% end %>
 </p>
--->
-<div id="wrap">
+<p>
+このid-><%= @showfile.filename %><br>
+パラメータid:<%= @id %>
+</p>
+
 	<div id="header"></div>
 	<div id="enchant-stage"></div>
 	<div id="footer"></div>
 
-	<div id="b-reset">RESET</div>
-	<div id="b-next">NEXT</div>
-	<div id="b-prev">PREV</div>
+	<div id="b-reset" data-id=<%= @showfile.id %>>RESET</div>
+	<div id="b-next" data-id=<%= @nextfile.id %>>NEXT</div>
+	<div id="b-prev" data-id=<%= @prevfile.id %>>PREV</div>
 </div>

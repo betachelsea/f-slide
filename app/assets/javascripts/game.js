@@ -11,21 +11,23 @@ var _complete = false;
 //var _shuffle_stop = false;
 var _root_partsimg = "./assets/";
 var _root_gifimg = "./assets/fukui/";
-var _PUZZLE_BOX_SIZE = 200;
+var _PUZZLE_BOX_SIZE = 320;
 
 
-window.onload = function(){
+//window.onload = function(){
+
+function system_start(_filename, _filetext) {
 
 	//初期設定＆リソース読み込み他
 	var game = new Game(_PUZZLE_BOX_SIZE, _PUZZLE_BOX_SIZE);
 	game.fps = 15;
-
-
+/*
 	for(var i=0; i<_resource.length; i++){
 		game.preload(_root_gifimg+_resource[i]);
   }
-    
-    game.preload(_root_partsimg+"header.png");
+  */
+	game.preload(_root_gifimg + _filename);
+	game.preload(_root_partsimg+"header.png");
     game.preload(_root_partsimg+"next.png");
     game.preload(_root_partsimg+"reset.png");
     game.preload(_root_partsimg+"prev.png");
@@ -36,7 +38,8 @@ window.onload = function(){
     game.onload = function() {
     	//スライドパズルの箱
     	var slideBox = new SlideBox(
-					game.assets[_root_gifimg+_resource[_nowResourceNum]], 
+					//game.assets[_root_gifimg+_resource[_nowResourceNum]], 
+					game.assets[_root_gifimg+_filename],
 					_PUZZLE_BOX_SIZE);
     	
    		//ヘッダー
