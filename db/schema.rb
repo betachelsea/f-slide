@@ -17,6 +17,9 @@ ActiveRecord::Schema.define(:version => 20121222132558) do
     t.string   "filename"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "doc"
+    t.string   "title"
+    t.integer  "org_id"
   end
 
 end

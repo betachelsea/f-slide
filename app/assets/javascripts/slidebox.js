@@ -165,13 +165,13 @@ var SlideBox = enchant.Class.create({
 		var bi = self.blankindex;
 		
 		if(self.judgeComplete() && n !== -1) {
-			return 0;//バラバラにする合図
+			return 0;//completed
 		}
 		
 		if (bi-d === n || bi+d === n ||
 			bi+1 === n || bi-1 === n) {
 			self.swap(n);
-			return 1;
+			return 1;//success
 		}
 		
 		return -1;//failed

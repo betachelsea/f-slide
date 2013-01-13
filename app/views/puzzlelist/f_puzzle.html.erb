@@ -1,16 +1,23 @@
 <div id="wrap">
 	<div id="header"></div>
 	<div id="enchant-stage"></div>
+	<p><%= @showfile.title %></p>
+	<p id="doc">
+	<%= @showfile.doc %>
+	</p>
+	<div id="timer"></div>
 
-	<div id="b-reset" class="button-text" data-id=<%= @showfile.id %>>
-		<a href="./<%= @showfile.id %>">RESET</a>
-	</div>
-	<div id="b-next" class="button-text" data-id=<%= @nextfile.id %>>
-		<a href="./<%= @nextfile.id %>">NEXT</a>
-	</div>
-	<div id="b-prev" class="button-text" data-id=<%= @prevfile.id %>>
-		<a href="./<%= @prevfile.id %>">PREV</a>
+	<div id="buttons">
+		<div id="b-reset" class="button-text" data-id=<%= @showfile.id %>>
+			<a href="./<%= @showfile.id %>">RESET</a>
+		</div>
+		<div id="b-next" class="button-text" data-id=<%= @nextfile.id %>>
+			<a href="./<%= @nextfile.id %>">NEXT</a>
+		</div>
+		<div id="b-prev" class="button-text" data-id=<%= @prevfile.id %>>
+			<a href="./<%= @prevfile.id %>">PREV</a>
+		</div>
 	</div>
 
-	<div id="footer"></div>
+	<div id="footer">powered by <a href="http://www.sozai.fuku-e.com">福井観光写真素材集</a></div>
 </div>

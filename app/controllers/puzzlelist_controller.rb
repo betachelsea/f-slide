@@ -12,7 +12,7 @@ class PuzzlelistController < ApplicationController
 			#数字以外の文字列のときはidはゼロとなる
 			@id = params[:id].to_i
 		end
-		
+
 		#現在表示するデータを取得
 		@showfile = PuzzleList.find(@id)
 
@@ -33,3 +33,6 @@ class PuzzlelistController < ApplicationController
 	end
 
 end
+
+
+
