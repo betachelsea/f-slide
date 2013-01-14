@@ -7,12 +7,18 @@ class PuzzlelistController < ApplicationController
 		@filenames = PuzzleList.all
 		
 		#URLで指定されたパラメータを取得
-		@id = 1
+        begin
+            @id = params[:id].to_i
+        rescue
+            @id = 0
+        end
+=begin
+        @id = 1
 		if params[:id] != nil
 			#数字以外の文字列のときはidはゼロとなる
 			@id = params[:id].to_i
 		end
-
+=end
 		#現在表示するデータを取得
 		@showfile = PuzzleList.find(@id)
 

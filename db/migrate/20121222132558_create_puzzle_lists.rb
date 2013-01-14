@@ -3,8 +3,10 @@ class CreatePuzzleLists < ActiveRecord::Migration
     create_table :puzzle_lists do |t|
 			t.string :filename
 			t.integer :id
-			t.string :doc
+			t.integer :org_id
+            t.string :doc
 			t.string :title
+        
       t.timestamps
     end
   end
