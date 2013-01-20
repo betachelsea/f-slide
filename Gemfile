@@ -21,9 +21,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
-  gem 'thin'
-end
+#2013/01/21 modify - use thin in heroku
+gem 'thin'
+gem 'foreman'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
