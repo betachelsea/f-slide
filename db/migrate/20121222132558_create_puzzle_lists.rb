@@ -4,7 +4,7 @@ class CreatePuzzleLists < ActiveRecord::Migration
 			t.string :filename
 			t.integer :id
 			t.integer :org_id
-            t.string :doc
+            		t.string :doc
 			t.string :title
         
       t.timestamps

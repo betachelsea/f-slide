@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(:version => 20121222132558) do
 
   create_table "puzzle_lists", :force => true do |t|
     t.string   "filename"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
     t.integer  "org_id"
     t.string   "doc"
     t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
