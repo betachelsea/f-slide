@@ -32,7 +32,7 @@ function system_start(_filename, _filetext) {
             //ゲーム開始・スライドパズルピース操作
 			scene.addEventListener('touchstart', function(e) {
 
-				var result = slideBox.operatePiece(e.localX, e.localY);
+				var result = slideBox.operatePiece(e.clientX, e.clientY);
 				if(result === 0) {//完成済みの状態のため、パズルをシャッフルさせる
                     var n = 0;
                     var shufflePuzzle = function() {
