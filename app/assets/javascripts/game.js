@@ -11,6 +11,7 @@ var _root_partsimg = "./assets/";
 var _root_gifimg = "./assets/fukui/";
 var _PUZZLE_BOX_SIZE = 320;
 
+$("#test").text("aiuoe");
 
 function system_start(_filename, _filetext) {
 	//初期設定＆リソース読み込み他
@@ -28,12 +29,14 @@ function system_start(_filename, _filetext) {
 			for(var i=0; i<slideBox.pieces.length; i++){	
 				scene.addChild(slideBox.pieces[i]);
 			}
-			
+		
+            scene.addEventListener('mousemove', function(e) {
+                $("#test").text("x->"+e.clientX+"y->"+e.clientY);
+            });
             //ゲーム開始・スライドパズルピース操作
 			scene.addEventListener('touchstart', function(e) {
 
 				var result = slideBox.operatePiece(e.clientX, e.clientY);
-				$("#test").text("x->"+e.clientX+",y->"+e,clientY);
                 if(result === 0) {//完成済みの状態のため、パズルをシャッフルさせる
                     var n = 0;
                     var shufflePuzzle = function() {
