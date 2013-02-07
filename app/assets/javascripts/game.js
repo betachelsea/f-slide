@@ -33,7 +33,8 @@ function system_start(_filename, _filetext) {
 			scene.addEventListener('touchstart', function(e) {
 
 				var result = slideBox.operatePiece(e.clientX, e.clientY);
-				if(result === 0) {//完成済みの状態のため、パズルをシャッフルさせる
+				$("#test").text("x->"+e.clientX+",y->"+e,clientY);
+                if(result === 0) {//完成済みの状態のため、パズルをシャッフルさせる
                     var n = 0;
                     var shufflePuzzle = function() {
                         console.log("shuffle:"+n);
