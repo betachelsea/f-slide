@@ -8,16 +8,15 @@
             <%= @showfile.doc %>
             </p>
             <div id="timer"></div>
-
             <div id="test"></div>
         </div>
     </div><!--end #main-contents-->
 
     <div id="footer">
         <div id="buttons">
-            <div><a href="./<%= @showfile.id %>">RESET</a></div>
-            <div><a href="./<%= @nextfile.id %>">NEXT</a></div>
-            <div><a href="./<%= @prevfile.id %>">PREV</a></div>
+            <a href="./<%= @nextfile.id %>">NEXT</a>／
+            <a href="./<%= @showfile.id %>">RESET</a>／
+            <a href="./<%= @prevfile.id %>">PREV</a>
         </div>
         <div id="information">
             powered by <a href="http://www.sozai.fuku-e.com">福井観光写真素材集</a>

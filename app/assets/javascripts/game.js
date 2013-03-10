@@ -8,14 +8,16 @@ var _click_y = 0;
 var _init_stage_position;
 
 var _nowResourceNum = 0;
-var _playStartTime = -1;//-1:未測定、他：シャッフル開始時間
-var _record = 0;
 var _complete = false;
 var _root_partsimg = "./assets/";
 var _root_gifimg = "./assets/fukui/";
 var _PUZZLE_BOX_SIZE = 320;
 
+//シャッフル時の(game.frame/game.fps)の時刻を保持しておく。-1は未測定
+var _playStartTime = -1;
+
 $("#test").text("miow");
+var _TEST_COMPLETE = false;
 
 function system_start(_filename, _filetext) {
 	//初期設定＆リソース読み込み他
@@ -23,6 +25,7 @@ function system_start(_filename, _filetext) {
 	var game = new Game(_PUZZLE_BOX_SIZE, _PUZZLE_BOX_SIZE);
 	game.fps = 15;
 	game.preload(_root_gifimg + _filename);
+
 	game.onload = function() {
 			//スライドパズルの箱
 			var slideBox = new SlideBox(
@@ -44,7 +47,8 @@ function system_start(_filename, _filetext) {
                 var result = slideBox.operatePiece(
                                 e.x + (_init_stage_position.left - bp.left),
                                 e.y + (_init_stage_position.top - bp.top));
-                if(result === 0) {//完成済みの状態のため、パズルをシャッフルさせる
+
+                if (result === 0) {//完成済みの状態のため、パズルをシャッフルさせる
                     var n = 0;
                     var shufflePuzzle = function() {
                         console.log("shuffle:"+n);
@@ -52,26 +56,30 @@ function system_start(_filename, _filetext) {
                         n++;
                         if (100 < n) {
                             scene.removeEventListener('enterframe', shufflePuzzle);
+                            _playStartTime = game.frame/game.fps;//アプリ読込後からの時刻を保持
                         }
                     };
                     scene.addEventListener('enterframe', shufflePuzzle);
-                }
-   			
-   			
                 
-                if(slideBox.judgeComplete() && _playStartTime !== -1){
+                } else if (slideBox.judgeComplete() && _playStartTime !== -1) {
                     _complete = true;
-                    _record = (game.frame/game.fps) - _playStartTime;
-                    info.text = "Congratulations! "+"Record time : "+getTimeStrings(_record);
+                    
+                    $("#timer").html("完成しました！<br/>記録："+getTimeStrings((game.frame/game.fps)-_playStartTime));
+                    console.log("CompTest");
+                    //$("#doc").show();//説明文表示
+                    _playStartTime = -1;//時間リセット
                 }
    		});
 
-   		
+   	    	
    		scene.addEventListener('enterframe', function() {
-   			if(_playStartTime !== -1 && !_complete) {
-   				var record = (game.frame/game.fps) - _playStartTime;
-   				
+   			
+            // $("#test").text(game.frame/game.fps);	
+            if(_playStartTime !== -1 && !_complete) {
+ 				var record = (game.frame/game.fps) - _playStartTime;
+                $("#timer").text(getTimeStrings((game.frame/game.fps)-_playStartTime));
    			}
+
    			if(_playStartTime === -1) {
    				
    			}
@@ -83,6 +91,7 @@ function system_start(_filename, _filetext) {
     game.start();
 };
 
+//秒数を渡すと分、秒に整形して文字列を返す
 function getTimeStrings(sectime) {
 	var min = Math.floor(sectime / 60);
    	var sec = Math.floor(sectime - min*60);

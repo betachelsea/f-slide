@@ -22,6 +22,7 @@ div#all-wrap {
 //$main_color: #3cf;
 #main-contents {
 //    padding-bottom: 80px;
+    text-align: center;
 }
 
 #header {
@@ -36,6 +37,9 @@ div#all-wrap {
 	width: 320px;
 }
 
+#doc {
+    display: none;//初期設定では隠す
+}
 
 
 #footer {
