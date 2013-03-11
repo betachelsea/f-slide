@@ -64,9 +64,9 @@ function system_start(_filename, _filetext) {
                 } else if (slideBox.judgeComplete() && _playStartTime !== -1) {
                     _complete = true;
                     
-                    $("#timer").html("完成しました！<br/>記録："+getTimeStrings((game.frame/game.fps)-_playStartTime));
+                    $("#timer").html("完成しました！<br/>記録＜"+getTimeStrings((game.frame/game.fps)-_playStartTime)+"＞");
                     console.log("CompTest");
-                    //$("#doc").show();//説明文表示
+                    $("#doc").show();//説明文表示
                     _playStartTime = -1;//時間リセット
                 }
    		});
