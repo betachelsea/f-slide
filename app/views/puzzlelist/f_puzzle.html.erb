@@ -1,13 +1,15 @@
 <div id="all-wrap">
     <div id="main-contents">
-        <div id="header"></div>
+        <div id="header">
+            <%= @showfile.title %>
+        </div>
         <div id="enchant-stage"></div>
         <div>
-            <p><%= @showfile.title %></p>
             <p id="doc">
             <%= @showfile.doc %>
             </p>
-            <div id="timer"></div>
+            <div id="timer">00:00:00</div>
+
             <div id="test"></div>
         </div>
     </div><!--end #main-contents-->
